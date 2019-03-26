@@ -1,4 +1,7 @@
-
+body {
+  font-family: 'Germania One', cursive;
+color :palegoldenrod;
+}
 .wrapper{
  display:inline-block;
 }
@@ -9,6 +12,7 @@
 #picLeft {
   max-width: 22%;
   display:inline-block;
+  max-height: 50px;
 
 }
 
