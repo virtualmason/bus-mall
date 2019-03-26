@@ -1,29 +1,37 @@
 
 .wrapper{
-  width: 100%;
-  margin-bottom: 13%;
+ display:inline-block;
 }
 .center {
   text-align: center;
 }
 
 #picLeft {
-  margin-left: 1%;
+  max-width: 22%;
+  display:inline-block;
+
 }
 
 #picMiddle{
-  margin-left: 1%;
+  max-width: 22%;
+  display:inline-block;
+  margin-left: 1.5%;
+
 }
 
-#picRight {
-  margin-left: 1%;
-}
-
-.left {
-  float: left;
-    width: 22%;
-}
 
 #picLast {
-    margin-left: 1%;
+  max-width: 22%;
+  display:inline-block;
+  margin-left: 1.5%;
+
+
 }
+
+/* .left {
+  float: left;
+    
+} */
+/* .right {
+  float: right;
+} */
