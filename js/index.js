@@ -1,23 +1,4 @@
-// var bag = '../img/bag.jpg';
-// var banana = '../img/banana.jpg';
-// var bathroom = '../img/bathroom.jpg';
-// var boots ='../img/boots.jpg';
-// var breakfast = '../img/breakfast.jpg';
-// var bubblegum = '../img/bubblegum.jpg';
-// var chair = '../img/chair.jpg';
-// var cthulhu = '../img/cthulhu.jpg';
-// var dogduck = '../img/dogduck.jpg';
-// var dragon = '../img/dragon.jpg';
-// var pen = '../img/pen.jpg';
-// var petsweep = '../img/petsweep.jpg';
-// var scissors = '../img/scissors.jpg';
-// var shark = '../img/shark.jpg';
-// var sweep = '../img/sweep.jpg';
-// var tauntaun = '../img/tauntaun.jpg';
-// var unicorn = '../img/unicorn.jpg';
-// var usb = '../img/usb.jpg';
-// var watercan = '../img/watercan.jpg';
-// var wineglass = '../img/wineglass.jpg';
+
  var totalClickGlobal = 0;
 var shown = {
   'bag': 0, 'banana': 0, 'bathroom' : 0, 'boots': 0, 'breakfast': 0, 'bubblegum': 0, 'chair': 0, 'cthulhu': 0,' dogduck': 0,'dragon': 0, 'pen': 0,'petsweep': 0, 'scissors': 0,'shark': 0,'sweep': 0, 'tauntaun': 0,'unicorn': 0,'usb': 0,
@@ -36,7 +17,6 @@ function inital(picone, pictwo,picthree) {
   var picOne = `<img src='${allImages[picone]}' width='100%' height='auto' data-pic="${allNames[picone]}">`;
   var num = allNames[picone];
   shown[num]++;
-  console.log(shown);
   
   var picTwo = `<img src='${allImages[pictwo]}' width='100%' height='auto' data-pic="${allNames[pictwo]}">`;
   var num2 = allNames[pictwo];
@@ -57,7 +37,7 @@ function inital(picone, pictwo,picthree) {
 }
 
 function BusMall(img, name) {
-  this.img = `<img src='${img}' width='100%' height='auto' onclick='pic.count(this)' data-pic-one="${name}">`;
+  // this.img = `<img src='${img}' width='100%' height='auto' onclick='pic.count(this)' data-pic-one="${name}">`;
   this.name = name;
   this.totalClick = 0;
   this.totalView = 0;
@@ -65,50 +45,38 @@ function BusMall(img, name) {
   this.totalPerentage = 0;
   this.count = function(img) {
     var imgClick = img.getAttribute('data-pic');
-    console.log('this runs');
     // this.totalClick += 1;
     this.totalView = 0; //this pic has been shown this many times
     this.nameAndTotal += 1; //this pic clickd this many times
-    totalClickGlobal += 1;///at 25 show
-    
-    // var imgTwo = img.getAttribute('data-pic-two');
-    // var imgThree = img.getAttribute('data-pic-three');
+    totalClickGlobal += 1;///at 25 show 
+    // console.log(totalClickGlobal, ' totalClickGlobal' );
+    // experemntal 
+    BusMall.all[i].nameAndTotal++;
 
-    // Extract word out of string with no file extention of \/
-    // var Oneimg = imgOne.match(/([^\/]+)(?=\.\w+$)/);
-    //  var Twoimg = imgTwo.match(/([^\/]+)(?=\.\w+$)/)[1];
-    // var Threeimg = imgThree.match(/([^\/]+)(?=\.\w+$)/)[1];
-    // console.log(Oneimg[0]);
-    //var index = allProductArray.indexOf(imgType);
-    // this.nameAndTotal = word;
-    // this.nameAndTotal.word = 0;
-    // this.nameAndTotal.word + 1;
-    // this.nameAndTotal.Oneimg = 0;
-    // totalClickGlobal += 1;
-
-  
   };
 }
 BusMall.all = [];
 
 for (var i = 0; i < allNames.length; i++ ) {
-    BusMall.all.push(new BusMall(allImages[i], allNames[i]));
-  }
+  BusMall.all.push(new BusMall(allImages[i], allNames[i]));
+}
 
-  var picLeft = document.getElementById('picLeft').addEventListener('click', handleClick);
-  var picMiddle= document.getElementById('picMiddle');
-  var picLast = document.getElementById('picLast');
+var picLeft = document.getElementById('picLeft').addEventListener('click', handleClick);
+var picMiddle= document.getElementById('picMiddle').addEventListener('click', handleClick);
+var picLast = document.getElementById('picLast').addEventListener('click', handleClick);
 
 function handleClick(event){
   for(var i = 0; i < BusMall.all.length; i++){
     if(event.target.getAttribute('data-pic') === BusMall.all[i].name){
       BusMall.all[i].totalClick++;
-      console.log(BusMall.all[i]);
+      /////exprermental
+      BusMall.all[i].totalClick++;
+
       break;
     }
   }
   inital(makeRandom(), makeRandom(), makeRandom());
 }
 
-console.table(BusMall.all);
+console.table(BusMall.all, ' buss mall all 112');
 //console.log(shown, ' shown');
