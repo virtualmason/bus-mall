@@ -89,7 +89,7 @@ function handleClick(event) {
     }
   }
 
-  if (totalClickGlobal < 5) {
+  if (totalClickGlobal < 25) {
     totalClickGlobal += 1;
     inital(makeRandom(), makeRandom(), makeRandom());
   } else {
