@@ -32,19 +32,19 @@ function makeRandom() {
 }
 
 inital(makeRandom(), makeRandom(), makeRandom());
-
 function inital(picone, pictwo,picthree) {
-  var picOne = `<img src='${allImages[picone]}' width='100%' height='auto' onclick='oneName.count(this)' data-pic="${allNames[picone]}">`;
+  var picOne = `<img src='${allImages[picone]}' width='100%' height='auto' data-pic="${allNames[picone]}">`;
   var num = allNames[picone];
-  shown[num]+1;
+  shown[num]++;
+  console.log(shown);
   
-  var picTwo = `<img src='${allImages[pictwo]}' width='100%' height='auto' onclick='oneName.count(this)' data-pic="${allNames[pictwo]}">`;
+  var picTwo = `<img src='${allImages[pictwo]}' width='100%' height='auto' data-pic="${allNames[pictwo]}">`;
   var num2 = allNames[pictwo];
-  shown[num2] +1;
+  shown[num2]++;
 
-  var picThree = `<img src='${allImages[picthree]}' width='100%' height='auto' onclick='oneName.count(this)' data-pic="${allNames[picthree]}">`;
+  var picThree = `<img src='${allImages[picthree]}' width='100%' height='auto' data-pic="${allNames[picthree]}">`;
   var num3 = allNames[picthree];
-  shown[num3] + 1;
+  shown[num3]++;
 
   // HTMl Selectors
   var picLeft = document.getElementById('picLeft');
@@ -65,6 +65,7 @@ function BusMall(img, name) {
   this.totalPerentage = 0;
   this.count = function(img) {
     var imgClick = img.getAttribute('data-pic');
+    console.log('this runs');
     // this.totalClick += 1;
     this.totalView = 0; //this pic has been shown this many times
     this.nameAndTotal += 1; //this pic clickd this many times
@@ -88,14 +89,26 @@ function BusMall(img, name) {
   
   };
 }
-    
+BusMall.all = [];
 
-for (var oneName of allNames ) {
-  for(var oneImg of allImages) {
-    oneName = new BusMall(oneImg, oneName);
+for (var i = 0; i < allNames.length; i++ ) {
+    BusMall.all.push(new BusMall(allImages[i], allNames[i]));
   }
+
+  var picLeft = document.getElementById('picLeft').addEventListener('click', handleClick);
+  var picMiddle= document.getElementById('picMiddle');
+  var picLast = document.getElementById('picLast');
+
+function handleClick(event){
+  for(var i = 0; i < BusMall.all.length; i++){
+    if(event.target.getAttribute('data-pic') === BusMall.all[i].name){
+      BusMall.all[i].totalClick++;
+      console.log(BusMall.all[i]);
+      break;
+    }
+  }
+  inital(makeRandom(), makeRandom(), makeRandom());
 }
 
-
-console.log(oneName, ' oneName');
-console.log(shown, ' shown');
+console.table(BusMall.all);
+//console.log(shown, ' shown');
