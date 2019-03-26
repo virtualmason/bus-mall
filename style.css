@@ -16,7 +16,7 @@ color :palegoldenrod;
 
 }
 
-#picMiddle{
+#picMiddle {
   max-width: 22%;
   display:inline-block;
   margin-left: 1.5%;
@@ -24,12 +24,16 @@ color :palegoldenrod;
 }
 
 
-#picLast {
+#picRight {
   max-width: 22%;
   display:inline-block;
   margin-left: 1.5%;
+}
 
-
+#picLeft,
+#picMiddle,
+#picRight {
+  cursor: pointer;
 }
 
 /* .left {
@@ -39,3 +43,10 @@ color :palegoldenrod;
 /* .right {
   float: right;
 } */
+
+
+#stats {
+  text-align: left;
+  color: #000;
+  width: 25%;
+}
