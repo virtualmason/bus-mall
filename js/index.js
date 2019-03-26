@@ -29,7 +29,7 @@ function makeRandom() {
 inital(makeRandom(), makeRandom(), makeRandom());
 
 function inital(picone, pictwo,picthree) {
-  var picOne = `<img src='${allProductArray[picone]}' width='100%' height='auto'>`;
+  var picOne = `<img src='${allProductArray[picone]}' width='100%' height='auto' onclick='pic.count(this)' data-pic-type="${allProductArray[picone]}">`;
   var picTwo = `<img src='${allProductArray[pictwo]}' width='100%' height='auto'>`;
   var picThree = `<img src='${allProductArray[picthree]}' width='100%' height='auto'>`;
 
@@ -42,17 +42,24 @@ function inital(picone, pictwo,picthree) {
   picMiddle.innerHTML = picTwo;
   picLast.innerHTML = picThree;
 }
- var totalClickGlobal = 0;
+  var totalClickGlobal = 0;
 
-function Bus(img, name) {
+function BusMall(img, name) {
   this.img = img;
   this.name = name;
   this.totalClick = 0;
   this.totalView = 0;
   this.totalPerentage = 0;
+  this.count = function(img) {
+    var imgType = img.getAttribute("data-pic-type");
+    console.log(imgType); 
+    totalClickGlobal += 1;
+
+  
+  };
 }
     
 
    
-var pic  = new Bus();
-// console.log(pic)
+var pic  = new BusMall();
+
