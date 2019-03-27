@@ -104,7 +104,7 @@ function handleClick(event) {
     }
   }
 
-  if (totalClickGlobal < 5) {
+  if (totalClickGlobal < 25) {
     totalClickGlobal += 1;
     /// renders  images on screen
     inital(makeRandom(), makeRandom(), makeRandom());
