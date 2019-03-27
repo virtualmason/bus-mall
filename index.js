@@ -22,15 +22,9 @@ var data = [
   { imageName: 'wineglass', path: 'img/wineglass.jpg', }
 ];
 
-var shown = {
-  'bag': 0, 'banana': 0, 'bathroom' : 0, 'boots': 0, 'breakfast': 0, 'bubblegum': 0, 'chair': 0, 'cthulhu': 0,' dogduck': 0,'dragon': 0, 'pen': 0,'petsweep': 0, 'scissors': 0,'shark': 0,'sweep': 0, 'tauntaun': 0,'unicorn': 0,'usb': 0,
-  'watercan': 0,'wineglass': 0
-};
-var allImages = ['../img/bag.jpg', '../img/banana.jpg','../img/bathroom.jpg','../img/boots.jpg','../img/breakfast.jpg','../img/bubblegum.jpg', '../img/chair.jpg','../img/cthulhu.jpg', '../img/dogduck.jpg', '../img/dragon.jpg','../img/pen.jpg','../img/petsweep.jpg','../img/scissors.jpg','../img/shark.jpg', '../img/sweep.jpg','../img/tauntaun.jpg', '../img/unicorn.jpg','../img/usb.jpg','../img/watercan.jpg','../img/wineglass.jpg'];
-// var allNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu',' dogduck','dragon', 'pen','petsweep', 'scissors','shark','sweep', 'tauntaun','unicorn','usb','watercan','wineglass'];
 
 //returns  Random number
-const makeRandom = () => Math.floor(Math.random() * allImages.length);
+const makeRandom = () => Math.floor(Math.random() * data.length);
 
 //taks random pic put's it in variable and renders it in html
 function inital(rand1, rand2, rand3) {
@@ -125,12 +119,12 @@ function handleClick(event) {
 function chartJS() {
 var ctx = document.getElementById('myChart').getContext('2d');
 var imageLabels = [];
-var imagePercentage = [];
+var imageTotal = [];
 
 BusMall.all.forEach(function(i) {
   imageLabels.push(i.name);
-  imagePercentage.push(i.clickPercentage);
-  console.log(imagePercentage);
+  imageTotal.push(i.totalClick);
+  console.log(i.totalClick);
  
 });
 var chart = new Chart(ctx, {
@@ -144,7 +138,7 @@ var chart = new Chart(ctx, {
       label: 'My First dataset',
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
-      data: imagePercentage
+      data: imageTotal
     }]
   },
 
