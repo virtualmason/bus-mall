@@ -110,7 +110,8 @@ function handleClick(event) {
     inital(makeRandom(), makeRandom(), makeRandom());
   } else {
     chartJS();
-    document.querySelector('#stats').innerHTML = `<pre>${JSON.stringify(BusMall.all, null, 3)}</pre>`;
+    //below shows raw stats
+    // document.querySelector('#stats').innerHTML = `<pre>${JSON.stringify(BusMall.all, null, 3)}</pre>`;
   }
 
   console.log('BusMall', BusMall.all);
