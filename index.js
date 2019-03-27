@@ -108,7 +108,6 @@ function handleClick(event) {
     // document.querySelector('#stats').innerHTML = `<pre>${JSON.stringify(BusMall.all, null, 3)}</pre>`;
   }
 
-  console.log('BusMall', BusMall.all);
 }
 // chart.js below
 
@@ -117,32 +116,40 @@ function handleClick(event) {
 ///update Chart.js below
 
 function chartJS() {
-var ctx = document.getElementById('myChart').getContext('2d');
-var imageLabels = [];
-var imageTotal = [];
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var imageLabels = [];
+  var imageTotals = [];
 
-BusMall.all.forEach(function(i) {
-  imageLabels.push(i.name);
-  imageTotal.push(i.totalClick);
-  console.log(i.totalClick);
- 
-});
-var chart = new Chart(ctx, {
+  BusMall.all.forEach(function(i) {
+    imageLabels.push(i.name);
+    imageTotals.push(i.totalClick);
+  });
+
+  //add info to localstorage
+  localStorage.setItem('imageLabels', JSON.stringify(imageLabels));
+  //get info from ocalstorageimageLabels);
+  localStorage.setItem('imageTotals', JSON.stringify(imageTotals));
+  //get info from ocalstorage
+  var imageTotalsFromLocalStorage = JSON.parse(localStorage.getItem('imageTotals'));
+  var imageLabelsFromLocalStorage = JSON.parse(localStorage.getItem('imageLabels'));
+  ///delete imageTotals from 151 and 146: delete imageLabels
+
+  var chart = new Chart(ctx, {
   // The type of chart we want to create
-  type: 'bar',
+    type: 'bar',
 
-  // The data for our dataset
-  data: {
-    labels: imageLabels,
-    datasets: [{
-      label: 'My First dataset',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: imageTotal
-    }]
-  },
+    // The data for our dataset
+    data: {
+      labels: imageLabelsFromLocalStorage,
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: imageTotalsFromLocalStorage
+      }]
+    },
 
-  // Configuration options go here
-  options: {}
-});
+    // Configuration options go here
+    options: {}
+  });
 }
