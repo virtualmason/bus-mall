@@ -5,6 +5,11 @@ color :palegoldenrod;
 .wrapper{
  display:inline-block;
 }
+
+canvas {
+  width: 100%;
+  text-align: center;
+}
 .center {
   text-align: center;
 }
