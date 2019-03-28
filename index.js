@@ -121,6 +121,10 @@ function handleClick(event) {
     inital(makeRandom(), makeRandom(), makeRandom());
   } else {
     chartJS();
+    picRight.removeEventListener('click', true);
+    picMiddle.removeEventListener('click', true);
+    picLeft.removeEventListener('click', true);
+
     //below shows raw stats
     // document.querySelector('#stats').innerHTML = `<pre>${JSON.stringify(BusMall.all, null, 3)}</pre>`;
   }
