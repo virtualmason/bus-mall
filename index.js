@@ -30,7 +30,7 @@ if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
 
 
 } else {
-  makeRandom();
+  inital(makeRandom(), makeRandom(), makeRandom());
 }
 
 //returns  Random number
