@@ -27,8 +27,7 @@ if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
   var imageLabels = JSON.parse(localStorage.getItem('imageLabels'));
 
   chartJS(imageTotal, imageLabels);
-  //...
- 
+
 
 } else {
   makeRandom();
