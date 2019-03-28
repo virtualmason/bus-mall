@@ -26,15 +26,13 @@ var data = [
 //returns  Random number
 const makeRandom = () => Math.floor(Math.random() * data.length);
 
-//taks random pic put's it in variable and renders it in html
+//takes random pic put's it in variable and renders it in html
 function inital(rand1, rand2, rand3) {
   // get rid of doubles
   if(rand1 === rand2 || rand1 === rand3 || rand3 === rand2 || rand3 === rand1  ) {
     inital(makeRandom(), makeRandom(), makeRandom());
 
   } else {
-
-  
     var picOne = `<img src='${data[rand1].path}' width='100%' height='auto' data-pic="${data[rand1].imageName}">`;
     var picTwo = `<img src='${data[rand2].path}' width='100%' height='auto' data-pic="${data[rand2].imageName}">`;
     var picThree = `<img src='${data[rand3].path}' width='100%' height='auto' data-pic="${data[rand3].imageName}">`;
@@ -49,7 +47,7 @@ function inital(rand1, rand2, rand3) {
     picRight.innerHTML = picThree;
   }
 }
-// invokes inital on line 35
+// invokes inital on line 36
 inital(makeRandom(), makeRandom(), makeRandom());
 
 if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
