@@ -35,14 +35,9 @@ color :palegoldenrod;
 #picRight {
   cursor: pointer;
 }
-
-/* .left {
-  float: left;
-    
-} */
-/* .right {
-  float: right;
-} */
+.black {
+  color: black;
+}
 
 
 #stats {
