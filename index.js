@@ -28,18 +28,26 @@ const makeRandom = () => Math.floor(Math.random() * data.length);
 
 //taks random pic put's it in variable and renders it in html
 function inital(rand1, rand2, rand3) {
-  var picOne = `<img src='${data[rand1].path}' width='100%' height='auto' data-pic="${data[rand1].imageName}">`;
-  var picTwo = `<img src='${data[rand2].path}' width='100%' height='auto' data-pic="${data[rand2].imageName}">`;
-  var picThree = `<img src='${data[rand3].path}' width='100%' height='auto' data-pic="${data[rand3].imageName}">`;
+  // get rid of doubles
+  if(rand1 === rand2 || rand1 === rand3 || rand3 === rand2 || rand3 === rand1  ) {
+    inital(makeRandom(), makeRandom(), makeRandom());
 
-  // HTMl Selectors
-  var picLeft = document.getElementById('picLeft');
-  var picMiddle= document.getElementById('picMiddle');
-  var picRight = document.getElementById('picRight');
+  } else {
 
-  picLeft.innerHTML = picOne;
-  picMiddle.innerHTML = picTwo;
-  picRight.innerHTML = picThree;
+  
+    var picOne = `<img src='${data[rand1].path}' width='100%' height='auto' data-pic="${data[rand1].imageName}">`;
+    var picTwo = `<img src='${data[rand2].path}' width='100%' height='auto' data-pic="${data[rand2].imageName}">`;
+    var picThree = `<img src='${data[rand3].path}' width='100%' height='auto' data-pic="${data[rand3].imageName}">`;
+
+    // HTMl Selectors
+    var picLeft = document.getElementById('picLeft');
+    var picMiddle= document.getElementById('picMiddle');
+    var picRight = document.getElementById('picRight');
+
+    picLeft.innerHTML = picOne;
+    picMiddle.innerHTML = picTwo;
+    picRight.innerHTML = picThree;
+  }
 }
 // invokes inital on line 35
 inital(makeRandom(), makeRandom(), makeRandom());
