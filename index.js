@@ -48,14 +48,13 @@ function inital(rand1, rand2, rand3) {
   }
 }
 // invokes inital on line 36
-inital(makeRandom(), makeRandom(), makeRandom());
+//inital(makeRandom(), makeRandom(), makeRandom());
 
-if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
+if (localStorage['imageTotals']) {
   var imageTotal = JSON.parse(localStorage.getItem('imageTotals'));
   var imageLabels = JSON.parse(localStorage.getItem('imageLabels'));
 
   chartJS(imageTotal, imageLabels);
-
 
 } else {
   inital(makeRandom(), makeRandom(), makeRandom());
@@ -78,9 +77,12 @@ for (var i = 0; i < data.length; i++ ) {
 }
 
 ///Add event listner to each pic after rendered on screen by using callback on line 74
-var picLeft = document.getElementById('picLeft').addEventListener('click', handleClick);
-var picMiddle= document.getElementById('picMiddle').addEventListener('click', handleClick);
-var picRight = document.getElementById('picRight').addEventListener('click', handleClick);
+var picLeft = document.getElementById('picLeft');
+picLeft.addEventListener('click', handleClick);
+var picMiddle= document.getElementById('picMiddle');
+picMiddle.addEventListener('click', handleClick);
+var picRight = document.getElementById('picRight');
+picRight.addEventListener('click', handleClick);
 
 // tests if img.name === data-pic becuase it updates totalViews, function ends line 109
 function handleClick(event) {
@@ -120,10 +122,23 @@ function handleClick(event) {
     /// renders  images on screen
     inital(makeRandom(), makeRandom(), makeRandom());
   } else {
-    chartJS();
-    picRight.removeEventListener('click', true);
-    picMiddle.removeEventListener('click', true);
-    picLeft.removeEventListener('click', true);
+    var imageLabels = [];
+    var imageTotals = [];
+  
+    if(BusMall.all !== undefined){
+      BusMall.all.forEach(function(i) {
+        imageLabels.push(i.name);
+        imageTotals.push(i.totalClick);
+      });
+    }
+    //add info to localstorage
+    localStorage.setItem('imageLabels', JSON.stringify(imageLabels));
+    //get info from ocalstorageimageLabels);
+    localStorage.setItem('imageTotals', JSON.stringify(imageTotals));
+    chartJS(imageTotals, imageLabels);
+    picRight.removeEventListener('click', handleClick);
+    picMiddle.removeEventListener('click', handleClick);
+    picLeft.removeEventListener('click', handleClick);
 
     //below shows raw stats
     // document.querySelector('#stats').innerHTML = `<pre>${JSON.stringify(BusMall.all, null, 3)}</pre>`;
@@ -138,25 +153,10 @@ function handleClick(event) {
 
 function chartJS(iTotals, iLables) {
   var ctx = document.getElementById('myChart').getContext('2d');
-  var imageLabels = [];
-  var imageTotals = [];
 
-  if(BusMall.all !== undefined){
-    BusMall.all.forEach(function(i) {
-      imageLabels.push(i.name);
-      imageTotals.push(i.totalClick);
-    });
-
-
-  }
- 
-  //add info to localstorage
-  localStorage.setItem('imageLabels', JSON.stringify(imageLabels));
-  //get info from ocalstorageimageLabels);
-  localStorage.setItem('imageTotals', JSON.stringify(imageTotals));
   //get info from ocalstorage
-  var imageTotalsFromLocalStorage = JSON.parse(localStorage.getItem('imageTotals'));
-  var imageLabelsFromLocalStorage = JSON.parse(localStorage.getItem('imageLabels'));
+  //var imageTotalsFromLocalStorage = JSON.parse(localStorage.getItem('imageTotals'));
+  //var imageLabelsFromLocalStorage = JSON.parse(localStorage.getItem('imageLabels'));
   // delete imageTotals from 151 and 146: delete imageLabels
 
   var chart = new Chart(ctx, {
@@ -165,12 +165,12 @@ function chartJS(iTotals, iLables) {
 
     // The data for our dataset
     data: {
-      labels: iLables !== undefined ? iLables: imageLabelsFromLocalStorage ,
+      labels: iLables /*!== undefined ? iLables: imageLabelsFromLocalStorage*/ ,
       datasets: [{
         label: 'My First dataset',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data:  iTotals !== undefined ? iTotals: imageTotalsFromLocalStorage
+        data:  iTotals /*!== undefined ? iTotals: imageTotalsFromLocalStorage*/
       }]
     },
 
