@@ -22,6 +22,17 @@ var data = [
   { imageName: 'wineglass', path: 'img/wineglass.jpg', }
 ];
 
+if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
+  var imageTotal = JSON.parse(localStorage.getItem('imageTotals'));
+  var imageLabels = JSON.parse(localStorage.getItem('imageLabels'));
+
+  chartJS(imageTotal, imageLabels);
+  //...
+ 
+
+} else {
+  makeRandom();
+}
 
 //returns  Random number
 const makeRandom = () => Math.floor(Math.random() * data.length);
@@ -77,18 +88,18 @@ function handleClick(event) {
       }
     });
   });
-///takes click event and gets data type ="name"
+    ///takes click event and gets data type ="name"
   let img = event.target.getAttribute('data-pic');
   //loops through arry of objects
   for(var i = 0; i < BusMall.all.length; i++) {
 
-    // checks if naame on Object === data attr name 
+    // checks if naame on Object === data attr name
     if (BusMall.all[i].name === img) {
       //increment objects in objects
       BusMall.all[i].totalClick++;
     }
-    
-      ///check ib totalClick object === totalVies then it's 100% click rate
+
+    ///check ib totalClick object === totalVies then it's 100% click rate
     if (BusMall.all[i].totalClick === BusMall.all[i].totalViews && BusMall.all[i].totalViews !== 0) {
       BusMall.all[i].clickPercentage = 100;
     } else {
@@ -115,16 +126,20 @@ function handleClick(event) {
 
 ///update Chart.js below
 
-function chartJS() {
+function chartJS(iTotals, iLables) {
   var ctx = document.getElementById('myChart').getContext('2d');
   var imageLabels = [];
   var imageTotals = [];
 
-  BusMall.all.forEach(function(i) {
-    imageLabels.push(i.name);
-    imageTotals.push(i.totalClick);
-  });
+  if(BusMall.all !== undefined){
+    BusMall.all.forEach(function(i) {
+      imageLabels.push(i.name);
+      imageTotals.push(i.totalClick);
+    });
 
+
+  }
+ 
   //add info to localstorage
   localStorage.setItem('imageLabels', JSON.stringify(imageLabels));
   //get info from ocalstorageimageLabels);
@@ -132,24 +147,25 @@ function chartJS() {
   //get info from ocalstorage
   var imageTotalsFromLocalStorage = JSON.parse(localStorage.getItem('imageTotals'));
   var imageLabelsFromLocalStorage = JSON.parse(localStorage.getItem('imageLabels'));
-  ///delete imageTotals from 151 and 146: delete imageLabels
+  // delete imageTotals from 151 and 146: delete imageLabels
 
   var chart = new Chart(ctx, {
-  // The type of chart we want to create
+    // The type of chart we want to create
     type: 'bar',
 
     // The data for our dataset
     data: {
-      labels: imageLabelsFromLocalStorage,
+      labels: iLables !== undefined ? iLables: imageLabelsFromLocalStorage ,
       datasets: [{
         label: 'My First dataset',
         backgroundColor: 'rgb(255, 99, 132)',
         borderColor: 'rgb(255, 99, 132)',
-        data: imageTotalsFromLocalStorage
+        data:  iTotals !== undefined ? iTotals: imageTotalsFromLocalStorage
       }]
     },
 
     // Configuration options go here
     options: {}
   });
+
 }
