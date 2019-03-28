@@ -22,16 +22,6 @@ var data = [
   { imageName: 'wineglass', path: 'img/wineglass.jpg', }
 ];
 
-if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
-  var imageTotal = JSON.parse(localStorage.getItem('imageTotals'));
-  var imageLabels = JSON.parse(localStorage.getItem('imageLabels'));
-
-  chartJS(imageTotal, imageLabels);
-
-
-} else {
-  inital(makeRandom(), makeRandom(), makeRandom());
-}
 
 //returns  Random number
 const makeRandom = () => Math.floor(Math.random() * data.length);
@@ -53,6 +43,17 @@ function inital(rand1, rand2, rand3) {
 }
 // invokes inital on line 35
 inital(makeRandom(), makeRandom(), makeRandom());
+
+if (JSON.parse(localStorage.getItem('imageTotals') !== null) ) {
+  var imageTotal = JSON.parse(localStorage.getItem('imageTotals'));
+  var imageLabels = JSON.parse(localStorage.getItem('imageLabels'));
+
+  chartJS(imageTotal, imageLabels);
+
+
+} else {
+  inital(makeRandom(), makeRandom(), makeRandom());
+}
 
 
 ///constructor definitaion gets perimiter from line 65, pushed into BusMall array
